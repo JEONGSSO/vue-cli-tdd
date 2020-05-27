@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <input type="text">
-    <button class="addBtn" @click="pushList">추가</button>
-    <ul class="todo_list" v-show="todoList.length"></ul>
+    <input class="inputTxt" type="text" v-model="txt" @keypress.enter="addItem">
+    <button class="addBtn" @click="addItem">추가</button>
+    <ul class="todo_list" v-show="todoList.length">
+      <li
+          v-for="(item, index) in todoList"
+          :key="index">
+          {{item.text}}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -14,16 +20,21 @@ export default {
   },
   data() {
     return {
-      todoList: [],
-      todo: false,
+      todoList: [
+        { text: 'good' },
+      ],
+      txt: '',
     };
   },
   methods: {
-    pushList(value) {
-      this.todoList.push(value);
+    addItem() {
+      if (!this.txt) {
+        return;
+      }
+      this.todoList.push(this.txt);
     },
-    removeList() {
-      console.log('good');
+    removeItem() {
+      this.todoList.push(this.txt);
     },
   },
 };
