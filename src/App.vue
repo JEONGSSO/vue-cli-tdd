@@ -1,24 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text">
+    <button class="addBtn" @click="pushList">추가</button>
+    <ul class="todo_list" v-show="todoList.length"></ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld,
+  },
+  data() {
+    return {
+      todoList: [],
+      todo: false,
+    };
+  },
+  methods: {
+    pushList(value) {
+      this.todoList.push(value);
+    },
+    removeList() {
+      console.log('good');
+    },
   },
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -1,12 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import HelloWorld from '@/components/HelloWorld.vue';
+import App from '@/App.vue';
 
-describe('HelloWorld.vue', () => {
+describe('vue Test', () => {
   it('renders props.msg when passed', () => {
-    const msg = 'new message';
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg },
-    });
-    expect(wrapper.text()).toMatch(msg);
+    const app = shallowMount(App);
+    const btn = app.find('.addBtn');
+    expect(btn.text('추가')).toBe('추가');
   });
 });
