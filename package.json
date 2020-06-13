@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --fix",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",
     "test-cv": "jest --coverage",
@@ -38,7 +38,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "linebreak-style": 0
+    },
     "overrides": [
       {
         "files": [
