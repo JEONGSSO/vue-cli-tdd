@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'hanSansBold';
+  src: url('/assets/font/SansBold.woff2');
+}
+@font-face {
+  font-family: 'hanSansLight';
+  src: url('/assets/font/SansLight.woff2');
+}
+@font-face {
+  font-family: 'hanSansRegular';
+  src: url('/assets/font/SansRegular.woff2');
+}
+@font-face {
+  font-family: 'hanSansThin';
+  src: url('/assets/font/SansThin.woff2');
+}
