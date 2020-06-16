@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <!-- <Picker /> -->
+    <Picker />
     <Footer />
-    <Slider />
   </div>
 </template>
 
@@ -11,15 +10,14 @@
 import Header from './layout/Header.vue';
 import Footer from './layout/Footer.vue';
 
-// import Picker from './components/Picker.vue';
-import Slider from './components/Slider.vue';
+import Picker from './components/Picker.vue';
 
 export default {
   name: 'app',
   components: {
     Header,
     Footer,
-    Slider,
+    Picker,
   },
   data() {
     return {};
