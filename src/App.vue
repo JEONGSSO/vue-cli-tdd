@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-<!--    <Picker />-->
+    <!--    <Picker />-->
     <Footer />
   </div>
 </template>
@@ -13,17 +13,17 @@ import Footer from './layout/Footer.vue';
 // import Picker from './components/Picker.vue';
 
 export default {
-name: 'app',
+  name: 'app',
   components: {
-  Header,
+    Header,
     Footer,
-  // Picker,
-},
-data() {
-  return {};
-},
-methods: {},
-computed: {},
+    // Picker,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+  computed: {},
 };
 </script>
 
