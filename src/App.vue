@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <!--    <Picker />-->
+    <router-view />
     <Footer />
   </div>
 </template>
@@ -10,14 +10,11 @@
 import Header from './layout/Header.vue';
 import Footer from './layout/Footer.vue';
 
-// import Picker from './components/Picker.vue';
-
 export default {
   name: 'app',
   components: {
     Header,
     Footer,
-    // Picker,
   },
   data() {
     return {};
@@ -27,15 +24,8 @@ export default {
 };
 </script>
 
-<style>
-@import url('./assets/css/reset.css');
-@import url('./assets/css/hansans.css');
-
-#app {
-  font-family: 'hanSansRegular';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #333;
-  font-size: 14px;
-}
+<style lang="sass">
+  @import 'assets/style/hansans.css'
+  @import 'assets/style/reset.css'
+  @import 'assets/style/common.scss'
 </style>

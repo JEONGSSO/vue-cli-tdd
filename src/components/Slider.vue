@@ -26,9 +26,9 @@
     </ul>
     <button class="arrow right" @click="clickEvent" data-val="1">오</button>
     <ul class="dotWrap">
-      <li class="dot" :class="activeIndex === 1 ? ' active' : '' "></li>
-      <li class="dot" :class="activeIndex === 2 ? ' active' : '' "></li>
-      <li class="dot" :class="activeIndex === 3 ? ' active' : '' "></li>
+      <li class="dot" :class="activeIndex === 1 ? ' active' : ''"></li>
+      <li class="dot" :class="activeIndex === 2 ? ' active' : ''"></li>
+      <li class="dot" :class="activeIndex === 3 ? ' active' : ''"></li>
     </ul>
   </div>
 </template>

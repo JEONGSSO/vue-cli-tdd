@@ -3,12 +3,12 @@
     <h1 class="logo_title">
       <a href="/">로고</a>
     </h1>
-    <h2 class="title">{{title}}</h2>
+    <h2 class="title">{{ title }}</h2>
     <nav class="nav_hader">
       <button class @click="toggleMenu">햄버거</button>
       <ul class="list_menu" v-show="isShowMenu">
         <li class="list_item" v-for="(list, index) in menuList" v-bind:key="index">
-          <a :href="list.href">{{list.title}}</a>
+          <router-link :to="list.path">{{ list.name }}</router-link>
         </li>
       </ul>
     </nav>
@@ -16,53 +16,27 @@
 </template>
 
 <script>
+import menuList from '../router/routes';
+
 export default {
   name: 'common-header',
   data() {
     return {
       title: 'Color Picker',
       isShowMenu: false,
-      menuList: [
-        {
-          title: 'Color Picker',
-          href: '/picker',
-        },
-        {
-          title: 'todoList',
-          href: '/todo',
-        },
-        {
-          title: 'timer',
-          href: '/timer',
-        },
-      ],
+      menuList,
     };
   },
   methods: {
     toggleMenu() {
       this.isShowMenu = this.isShowMenu === false;
+      // console.log(fp);
     },
   },
   computed: {},
 };
 </script>
 
-<style>
-.header {
-  display: flex;
-  padding: 0 30px;
-  border-bottom: solid 1px #d1d2d6;
-  justify-content: space-between;
-  line-height: 50px;
-}
-
-.header .nav_hader .list_menu {
-  position: fixed;
-  width: 100px;
-}
-
-.header .nav_hader .list_item a {
-  display: block;
-  border: solid 1px gray;
-}
+<style lang="sass">
+  @import '../assets/style/layout/header.scss'
 </style>
