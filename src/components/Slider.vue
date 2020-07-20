@@ -1,5 +1,5 @@
 <template>
-  <div class="imageWrap">
+  <article class="imageWrap">
     <button class="arrow left" @click="clickEvent" data-val="-1">왼</button>
     <ul class="imageList">
       <li :class="activeIndex === 1 ? ' active' : ''">
@@ -30,7 +30,7 @@
       <li class="dot" :class="activeIndex === 2 ? ' active' : ''"></li>
       <li class="dot" :class="activeIndex === 3 ? ' active' : ''"></li>
     </ul>
-  </div>
+  </article>
 </template>
 
 <script>

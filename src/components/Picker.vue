@@ -1,16 +1,16 @@
 <template>
-  <main class="pickerBody">
-    <div class="colorWrap">
+  <section class="picker_wrap">
+    <div class="color_wrap">
       <div class="preview"></div>
-      <div class="selectWrap" @click="seletor"></div>
+      <div class="select_wrap" @click="seletor"></div>
     </div>
-    <div class="colorHex">
+    <div class="color_hex">
       <input class="input" type="text" />
     </div>
     <div class="slider">
-      <div class="sliderBar"></div>
+      <div class="slider_bar"></div>
     </div>
-  </main>
+  </section>
 </template>
 
 <script>
@@ -24,58 +24,49 @@ export default {
 </script>
 
 <style>
-.pickerBody {
-  width: 500px;
-  height: 400px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-left: -250px;
-  margin-top: -200px;
+.picker_wrap {
+  margin: 200px auto 0;
+  width: 1000px;
   border: solid 1px #d1d2d6;
   text-align: center;
 }
-.pickerBody .colorWrap {
+.picker_wrap .color_wrap {
   height: 270px;
 }
 
-.pickerBody .preview {
+.picker_wrap .preview {
   float: left;
   background-color: aqua;
   width: 20%;
   height: 100%;
 }
 
-.pickerBody .selectWrap {
+.picker_wrap .select_wrap {
   float: right;
   background-color: rgb(27, 29, 29);
   height: 100%;
   width: 80%;
 }
 
-.pickerBody .colorHex {
+.picker_wrap .color_hex {
   margin-top: 20px;
 }
 
-.pickerBody .colorHex .input {
+.picker_wrap .color_hex .input {
   height: 50px;
-  width: 100%;
+  width: 80%;
   text-align: center;
   border: solid 1px #d1d2d6;
 }
 
-.pickerBody .slider {
+.picker_wrap .slider {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
   height: 50px;
-  line-height: 50px;
-  width: 100%;
 }
 
-.pickerBody .slider .sliderBar {
+.picker_wrap .slider .slider_bar {
   width: 80%;
   height: 20px;
   border-radius: 50px;
