@@ -36,7 +36,6 @@ export default {
     changeTitle() {
       const CurrentPath = this.$route.path;
       const pathName = this.$router.options.routes.filter((v) => v.path === CurrentPath);
-      console.log(pathName);
       return pathName[0] ? pathName[0].name : 'Home';
     },
   },

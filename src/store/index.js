@@ -8,9 +8,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    title: 'Home',
+    count: 0,
   },
   mutations: {
+    increment(state) {
+      state.count += 1;
+    },
   },
   actions: {
   },
