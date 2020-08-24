@@ -19,7 +19,9 @@ export default {
     Footer,
   },
   data() {
-    return {};
+    return {
+      test: 'good',
+    };
   },
   methods: {},
   computed: {},

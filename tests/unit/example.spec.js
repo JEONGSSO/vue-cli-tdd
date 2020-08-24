@@ -1,15 +1,38 @@
-import { shallowMount } from '@vue/test-utils';
+import VueRouter from 'vue-router';
+import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
+
 import App from '@/App.vue';
+import routes from '../../src/router/routes';
+
+const localVue = createLocalVue();
+const router = new VueRouter({ routes });
+localVue.use(VueRouter);
 
 let app;
 let data;
+// eslint-disable-next-line no-unused-vars
 let totalCount;
+
 const mockcallback = jest.fn((f) => f + 2);
-describe('Test', () => {
-  beforeEach(() => { // it 테스트 전에 정의할 값들을 만들때 좋다. DRY로 중복되는 코드를 한번에 쓰자.
-    app = shallowMount(App);
-    data = app.vm.$data;
-    totalCount = app.find('.totalCount');
+describe('뷰 테스트', () => {
+  // beforeEach(() => { // it 테스트 전에 정의할 값들을 만들때 좋다. DRY로 중복되는 코드를 한번에 쓰자.
+  // });
+  it('얕은 마운트 data 접근 테스트', () => {
+    const wrapper = shallowMount(App, {
+      localVue,
+      router,
+    });
+    expect(wrapper.vm.$data.test).toBe('good');
+  });
+
+  it('마운트 라우팅 push 테스트', async () => {
+    const wrapper = mount(App, {
+      localVue,
+      router,
+    });
+    router.push('/slider');
+    await wrapper.vm.$nextTick();
+    expect(wrapper.find('.title').text()).toBe('Slider');
   });
 
   // it('addBtn Click todoList item add Test', () => {
@@ -38,7 +61,7 @@ describe('Test', () => {
     expect(data.todoList[0].quantity).toBe(2);
   });
 
-  it('mockTest', () => {
+  it.skip('mockTest', () => {
     [1].forEach(mockcallback);
     expect(mockcallback.mock.results[0].value).toBe(3);
   });
