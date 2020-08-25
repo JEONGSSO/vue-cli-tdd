@@ -31,5 +31,6 @@ export default {
 <style lang="sass">
   @import 'assets/style/hansans.css'
   @import 'assets/style/reset.css'
+  @import 'assets/style/app.scss'
   @import 'assets/style/common.scss'
 </style>
