@@ -22,9 +22,11 @@
     <div v-if="loading">
       good
     </div>
-    <div v-else>
-      {{data}}
-    </div>
+    <ul v-else>
+      <li v-for="(board, index) in boardList" :key="index">
+        {{board}}}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -39,22 +41,18 @@ export default {
   data() {
     return {
       loading: false,
-      data: [],
+      boardList: [],
     };
   },
   methods: {
     async fetchData() {
       this.loading = true;
-      const { data } = await this.$axios.get('http://localhost:3000/health');
-      this.data = data;
-      this.loading = false;
-      // const req = new XMLHttpRequest();
-      // req.open('GET', 'http://localhost:3000/health');
-      // req.send();
-      // req.addEventListener('load', () => {
-      //   this.data = JSON.parse(req.response);
-      //   this.loading = false;
-      // });
+      try {
+        const res = await this.$axios('get', 'boards');
+        this.boardList = res === undefined ? [] : res.data;
+      } finally {
+        this.loading = false;
+      }
     },
   },
   created() {
