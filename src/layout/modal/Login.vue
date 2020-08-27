@@ -3,23 +3,58 @@
     <form action="">
       <label>
         이메일 :
-        <input type="text" name="email" />
+        <input type="text" name="email"
+          v-model="email"
+          autofocus
+        />
       </label>
       <label>
         패스워드 :
-        <input type="password" name="pw" />
+        <input type="password" name="password"
+           v-model="password"
+        />
       </label>
-      <button @click.prevent="submitLogin">로그인</button>
+      <button
+        :class="{valid_btn: !validData}"
+        :disabled="validData"
+        @click.prevent="submitLogin"
+      >로그인</button>
     </form>
+    <p class="error" v-if="error">{{error}}</p>
   </div>
 </template>
 
 <script>
+import { setToken } from '../../utils/index';
+
 export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: '',
+    };
+  },
   methods: {
     async submitLogin() {
-      const tt = await this.$axios('POST', 'login');
-      console.log(tt);
+      const { email, password } = this;
+      const res = await this.$axios('POST', 'login', { email, password });
+      if (res) {
+        const { accessToken } = res.data;
+        localStorage.setItem('token', accessToken);
+        setToken(accessToken);
+        await this.$router.push(this.rPath);
+      } else {
+        this.error = '이메일 또는 패스워드를 확인해주세요';
+      }
+    },
+  },
+  created() {
+    this.rPath = this.$route.query.rPath || '/';
+  },
+  computed: {
+    validData() {
+      return !this.email || !this.password;
     },
   },
 };

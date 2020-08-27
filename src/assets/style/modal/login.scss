@@ -2,12 +2,23 @@
   //display: none;
   position: absolute;
   width: 500px;
+  padding: 10px;
   border: solid 1px #7f7f7f;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   label {
-    display: block;
+    display: inline-block;
+  }
+
+  button {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    border: solid 1px #000066;
+    &.valid_btn {
+      background-color: #008800;
+      color: #fff;
+    }
   }
 }

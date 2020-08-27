@@ -9,16 +9,21 @@ const HTTP_STATUS = {
 };
 
 const UnAuthRedirector = () => {
-  console.log('로그인을 해줴요');
+  console.log('401');
 };
 
-const req = (method, url, data) => axios({
+const setToken = (token) => {
+  axios.defaults.headers.common.Authorization = token ? `Bearer ${token}` : null;
+};
+
+const request = (method, url, data) => axios({
   method,
   url: `${HOST}:${PORT}/${url}`,
   data,
 }).catch((error) => {
+  if (url === 'login') return;
   const { status } = error.response;
   if (status === HTTP_STATUS.UN_AHTHORIZED) UnAuthRedirector();
 });
 
-export default req;
+export { request, setToken };

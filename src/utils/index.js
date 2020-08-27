@@ -1,5 +1,3 @@
-import axios from './sendAxios';
+import { request as axios, setToken } from './sendAxios';
 
-const dd = '2';
-
-export { axios, dd };
+export { axios, setToken };
