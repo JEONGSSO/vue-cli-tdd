@@ -1,5 +1,5 @@
 <template>
-  <div class="login_modal_wrap">
+  <div class="login_modal_wrap" v-show="visibleLogin">
     <form action="">
       <label>
         이메일 :
@@ -43,18 +43,20 @@ export default {
         const { accessToken } = res.data;
         localStorage.setItem('token', accessToken);
         setToken(accessToken);
-        await this.$router.push(this.rPath);
+        this.$store.dispatch('isAuth');
       } else {
         this.error = '이메일 또는 패스워드를 확인해주세요';
       }
     },
   },
   created() {
-    this.rPath = this.$route.query.rPath || '/';
   },
   computed: {
     validData() {
       return !this.email || !this.password;
+    },
+    visibleLogin() {
+      return this.$store.getters.visibleModal;
     },
   },
 };

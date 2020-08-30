@@ -16,5 +16,5 @@ Vue.prototype.$axios = axios;
 new Vue({
   render: (h) => h(App),
   router,
-  store
+  store,
 }).$mount('#app');

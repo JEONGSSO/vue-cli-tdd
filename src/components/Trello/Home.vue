@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isAuth">
     <router-link to="/trello">Home</router-link>
       <Board
         :bid="bid"
@@ -28,6 +28,15 @@ export default {
       this.bid = params.bid;
       this.cid = params.cid;
     },
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters.isAuth;
+    },
+  },
+  mounted() {
+    // eslint-disable-next-line no-unused-expressions
+    this.$store.getters.isAuth ? '' : this.$store.dispatch('openModal');
   },
 };
 </script>

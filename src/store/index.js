@@ -13,10 +13,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isAuth: !!localStorage.getItem('token'),
     todoList: [],
     count: 0,
+    visibleModal: false,
   },
   actions: {
+    isAuth(context, payload) {
+      context.commit('isAuth', payload);
+    },
+    openModal(context, payload) {
+      context.commit('openModal', payload);
+    },
+    closeModal(context, payload) {
+      context.commit('closeModal', payload);
+    },
     addItem(context, payload) {
       context.commit('addItem', payload.addItem);
     },
@@ -30,6 +41,15 @@ export default new Vuex.Store({
   mutations: {
     increment(state) {
       state.count += 1;
+    },
+    isAuth() {
+      this.state.isAuth = true;
+    },
+    openModal() {
+      this.state.visibleModal = true;
+    },
+    closeModal() {
+      this.state.visibleModal = false;
     },
     addItem({ todoList }, item) {
       todoList.push({
@@ -46,6 +66,14 @@ export default new Vuex.Store({
       todoList[idx].data = value;
       // eslint-disable-next-line no-param-reassign
       todoList[idx].isUpdate = false;
+    },
+  },
+  getters: {
+    isAuth(state) {
+      return state.isAuth;
+    },
+    visibleModal(state) {
+      return state.visibleModal;
     },
   },
 });

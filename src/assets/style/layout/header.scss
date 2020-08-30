@@ -8,6 +8,12 @@
   line-height: 50px;
   background-color: $color1;
 
+  .nav_right {
+    display:flex;
+    width: 120px;
+    justify-content:space-between;
+  }
+
   .logo_title a{
     display: block;
     text-decoration: none;
@@ -18,7 +24,7 @@
     height: 100%;
   }
 
-  .nav_hader .list_menu {
+  .nav_header .list_menu {
     position: fixed;
     width: 100px;
 
