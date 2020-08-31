@@ -1,5 +1,5 @@
 <template>
-  <div class="login_modal_wrap" v-show="visibleLogin">
+  <div class="login_modal_wrap" v-show="visibleModal">
     <form action="">
       <label>
         이메일 :
@@ -17,7 +17,7 @@
       <button
         :class="{valid_btn: !validData}"
         :disabled="validData"
-        @click.prevent="submitLogin"
+        @click.prevent="login"
       >로그인</button>
     </form>
     <p class="error" v-if="error">{{error}}</p>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { setToken } from '../../utils/index';
 
 export default {
@@ -36,7 +37,7 @@ export default {
     };
   },
   methods: {
-    async submitLogin() {
+    async login() {
       const { email, password } = this;
       const res = await this.$axios('POST', 'login', { email, password });
       if (res) {
@@ -44,20 +45,19 @@ export default {
         localStorage.setItem('token', accessToken);
         setToken(accessToken);
         this.$store.dispatch('isAuth');
+        this.$store.dispatch('closeModal');
       } else {
         this.error = '이메일 또는 패스워드를 확인해주세요';
       }
     },
   },
-  created() {
-  },
   computed: {
     validData() {
       return !this.email || !this.password;
     },
-    visibleLogin() {
-      return this.$store.getters.visibleModal;
-    },
+    ...mapGetters([
+      'visibleModal',
+    ]),
   },
 };
 </script>

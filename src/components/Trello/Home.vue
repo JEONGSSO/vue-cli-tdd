@@ -10,7 +10,6 @@
 
 <script>
 import Board from './Board.vue';
-// import Card from './Card.vue';
 
 export default {
   data() {
@@ -21,7 +20,6 @@ export default {
   },
   components: {
     Board,
-    // Card,
   },
   watch: {
     $route({ params }) {

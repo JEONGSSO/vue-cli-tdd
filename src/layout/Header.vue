@@ -20,8 +20,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import menuList from '../router/routes';
 import { modal } from '../mixins';
+import setToken from '../utils/setToken';
 
 export default {
   name: 'common-header',
@@ -39,7 +42,9 @@ export default {
     },
     logout() {
       localStorage.removeItem('token');
-      window.location.href = '/';
+      setToken(null);
+      this.$store.dispatch('isAuth');
+      this.$router.push('/');
     },
   },
   computed: {
@@ -50,9 +55,9 @@ export default {
         && options.routes.filter((v) => v.path === currentPath);
       return pathName[0] ? pathName[0].name : 'Home';
     },
-    isAuth() {
-      return this.$store.getters.isAuth;
-    },
+    ...mapGetters([
+      'isAuth',
+    ]),
   },
 };
 </script>

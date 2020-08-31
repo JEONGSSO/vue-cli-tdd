@@ -43,7 +43,7 @@ export default new Vuex.Store({
       state.count += 1;
     },
     isAuth() {
-      this.state.isAuth = true;
+      this.state.isAuth = !this.state.isAuth;
     },
     openModal() {
       this.state.visibleModal = true;
@@ -69,9 +69,7 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    isAuth(state) {
-      return state.isAuth;
-    },
+    isAuth: (state) => state.isAuth,
     visibleModal(state) {
       return state.visibleModal;
     },
