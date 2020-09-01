@@ -103,7 +103,7 @@ export default {
 .dotWrap {
   width: 200px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-betwcoeen;
   position: absolute;
   left: 50%;
   bottom: 0;

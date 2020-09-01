@@ -33,7 +33,7 @@ export default {
     return {
       title: 'Color Picker',
       isShowMenu: false,
-      menuList,
+      menuList: menuList.filter((v) => !v.children),
     };
   },
   methods: {
