@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     // eslint-disable-next-line no-unused-expressions
-    this.$store.getters.isAuth ? '' : this.$store.dispatch('openModal');
+    this.$store.getters.isAuth ? '' : this.$store.dispatch('openModalName', 'login');
   },
   watch: {
     $route(t) {
@@ -64,6 +64,8 @@ export default {
     },
   },
 };
+
+// 생성 모달
 </script>
 
 <style lang="sass">

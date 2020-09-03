@@ -1,17 +1,10 @@
 export default {
-  data() {
-    return {
-      visibleModal: false,
-    };
-  },
   methods: {
-    openModal() {
-      this.$store.dispatch('openModal');
+    openModalName(name) {
+      this.$store.dispatch('openModalName', name);
     },
     closeModal() {
       this.$store.dispatch('closeModal');
     },
-  },
-  mounted() {
   },
 };

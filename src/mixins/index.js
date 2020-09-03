@@ -1,5 +1,4 @@
 import modal from './modal';
+import vuex from './vuex';
 
-const dd = '';
-
-export { modal, dd };
+export { modal, vuex };

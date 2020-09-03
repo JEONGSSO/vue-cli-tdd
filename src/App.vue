@@ -5,22 +5,24 @@
       <router-view />
     </main>
     <Footer />
-    <Login />
+    <Modal v-show="modalName"/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import Header from './layout/Header.vue';
 import Footer from './layout/Footer.vue';
 
-import Login from './layout/modal/Login.vue';
+import Modal from './layout/modal/Modal.vue';
 
 export default {
   name: 'app',
   components: {
     Header,
     Footer,
-    Login,
+    Modal,
   },
   data() {
     return {
@@ -28,7 +30,12 @@ export default {
     };
   },
   methods: {},
-  computed: {},
+  computed: {
+
+    ...mapGetters([
+      'modalName',
+    ]),
+  },
 };
 </script>
 

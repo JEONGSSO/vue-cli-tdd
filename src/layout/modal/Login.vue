@@ -1,38 +1,40 @@
 <template>
-  <div class="login_modal_wrap" v-show="visibleModal">
-    <form action="">
-      <label>
-        이메일 :
-        <input type="text" name="email"
-          v-model="email"
-          autofocus
-        />
-      </label>
-      <label>
-        패스워드 :
-        <input type="password" name="password"
-           v-model="password"
-        />
-      </label>
-      <button
-        :class="{valid_btn: !validData}"
-        :disabled="validData"
-        @click.prevent="login"
-      >로그인</button>
-    </form>
-    <p class="error" v-if="error">{{error}}</p>
+  <div>
+    <div class="modal_body">
+      <form action="">
+        <div>
+          <label>이메일 :</label>
+          <input type="text" name="email"
+            v-model="email"
+            autofocus
+          />
+        </div>
+        <div>
+          <label>패스워드 :</label>
+          <input type="password" name="password"
+             v-model="password"
+          />
+        </div>
+        <button
+          class="btn_submit"
+          :class="{valid_btn: !validData}"
+          :disabled="validData"
+          @click.prevent="login"
+        >로그인</button>
+      </form>
+      <p class="error" v-if="error">{{error}}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import { setToken } from '../../utils/index';
 
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      email: 'test@test.com',
+      password: '123123',
       error: '',
     };
   },
@@ -55,9 +57,6 @@ export default {
     validData() {
       return !this.email || !this.password;
     },
-    ...mapGetters([
-      'visibleModal',
-    ]),
   },
 };
 </script>
