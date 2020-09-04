@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { request } from '../utils/sendAxios';
+import { setToken } from '../utils/index';
+
 Vue.use(Vuex);
 
 // Mutations: state 값을 변경하는 로직 (동기적)
@@ -15,8 +18,9 @@ export default new Vuex.Store({
   state: {
     isAuth: !!localStorage.getItem('token'),
     todoList: [],
-    count: 0,
     modalName: '',
+    boardList: [],
+    cardList: [],
   },
   actions: {
     isAuth(context, payload) {
@@ -27,6 +31,18 @@ export default new Vuex.Store({
     },
     closeModal(context, payload) {
       context.commit('closeModal', payload);
+    },
+    async fetchBoardList({ commit }) {
+      setToken(localStorage.getItem('token'));
+      try {
+        const { data } = await request('get', 'boards');
+        commit('fetchBoardList', data.list);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    fetchCardList(context, payload) {
+      context.commit('fetchCardList', payload);
     },
     addItem(context, payload) {
       context.commit('addItem', payload.addItem);
@@ -39,9 +55,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    increment(state) {
-      state.count += 1;
-    },
     isAuth() {
       this.state.isAuth = !this.state.isAuth;
     },
@@ -50,6 +63,12 @@ export default new Vuex.Store({
     },
     closeModal(state) {
       state.modalName = '';
+    },
+    fetchBoardList(state, payload) {
+      state.boardList = payload;
+    },
+    fetchCardList(state, payload) {
+      state.cardList = payload;
     },
     addItem({ todoList }, item) {
       todoList.push({
@@ -69,7 +88,9 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    isAuth: (state) => state.isAuth,
-    modalName: (state) => state.modalName,
+    isAuth: ({ isAuth }) => isAuth,
+    modalName: ({ modalName }) => modalName,
+    boardList: ({ boardList }) => boardList,
+    cardList: ({ cardList }) => cardList,
   },
 });

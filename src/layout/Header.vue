@@ -7,7 +7,6 @@
     <div class="nav_right">
       <button @click="openModalName('login')" v-if="!isAuth">로그인</button>
       <button @click="logout" v-else>로그아웃</button>
-      <button @click="openModalName('AddBoard')">모달열기</button>
       <nav class="nav_header">
         <button class="btn_menu prl_10" @click="toggleMenu">햄버거</button>
         <ul class="list_menu" v-show="isShowMenu">

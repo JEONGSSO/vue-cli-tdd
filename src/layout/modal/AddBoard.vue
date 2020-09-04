@@ -3,7 +3,7 @@
     <div class="modal_body">
       <form action="">
         <div>
-          <label>보드명 :</label>
+          <label>보드 이름</label>
           <input type="text" name="boardName"
                  v-model="boardName"
                  autofocus
@@ -13,7 +13,7 @@
           class="btn_submit"
           :class="{valid_btn: !validData}"
           :disabled="validData"
-          @click.prevent="login"
+          @click.prevent="addBoard"
         >생성</button>
       </form>
       <p class="error" v-if="error">{{error}}</p>
@@ -30,6 +30,17 @@ export default {
       boardName: '',
       error: '',
     };
+  },
+  methods: {
+    async addBoard() {
+      try {
+        await this.$axios('post', 'boards', { title: this.boardName });
+        this.$store.dispatch('closeModal');
+      } catch (e) {
+        console.log(e);
+      }
+      this.$store.dispatch('fetchBoardList');
+    },
   },
   computed: {
     validData() {
