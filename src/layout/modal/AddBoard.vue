@@ -37,7 +37,8 @@ export default {
         await this.$axios('post', 'boards', { title: this.boardName });
         this.$store.dispatch('closeModal');
       } catch (e) {
-        console.log(e);
+        // eslint-disable-next-line no-console
+        console.error(e);
       }
       this.$store.dispatch('fetchBoardList');
     },

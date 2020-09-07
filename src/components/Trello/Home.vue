@@ -37,20 +37,13 @@ export default {
     this.fetchBoardList();
   },
   computed: {
-    // eslint-disable-next-line vue/return-in-computed-property
     ...mapGetters([
       'isAuth',
       'boardList',
     ]),
   },
   mounted() {
-    // eslint-disable-next-line no-unused-expressions
-    this.$store.getters.isAuth ? '' : this.$store.dispatch('openModalName', 'login');
-  },
-  watch: {
-    $route(t) {
-      console.log(t);
-    },
+    if (this.$store.getters.isAuth) this.$store.dispatch('openModalName', 'login');
   },
 };
 </script>
