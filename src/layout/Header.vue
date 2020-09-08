@@ -8,14 +8,30 @@
       <button @click="openModalName('login')" v-if="!isAuth">로그인</button>
       <button @click="logout" v-else>로그아웃</button>
       <nav class="nav_header">
-        <button class="btn_menu prl_10" @click="toggleMenu">햄버거</button>
-        <ul class="list_menu" v-show="isShowMenu">
-          <li class="list_item" v-for="(list, index) in menuList" v-bind:key="index">
-            <router-link :to="list.path">{{ list.name }}</router-link>
-          </li>
-        </ul>
+        <button class="btn_menu" @click="toggleMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
     </div>
+    <div class="menu_wrap"
+         :class="{ selected: isShowMenu, hover }"
+    >
+      <div class="menu_btn"
+           :class="{ selected: isShowMenu }"
+           @mouseover="isMouseOver(true)"
+           @mouseleave="isMouseOver(false)"
+      >
+        <button class="test_btn" @click="toggleMenu"></button>
+      </div>
+      <ul class="list_menu" v-show="isShowMenu">
+        <li class="list_item" v-for="(list, index) in menuList" v-bind:key="index">
+          <router-link :to="list.path">{{ list.name }}</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="background_wrap" v-show="isShowMenu" @click="toggleMenu"></div>
   </header>
 </template>
 
@@ -34,17 +50,22 @@ export default {
       title: 'Color Picker',
       isShowMenu: false,
       menuList: menuList.filter((v) => !v.children),
+      hover: false,
     };
   },
   methods: {
     toggleMenu() {
       this.isShowMenu = this.isShowMenu === false;
+      this.hover = false;
     },
     logout() {
       localStorage.removeItem('token');
       setToken(null);
       this.$store.dispatch('isAuth');
       this.$router.push('/');
+    },
+    isMouseOver(flag) {
+      this.hover = flag;
     },
   },
   computed: {
@@ -58,6 +79,11 @@ export default {
     ...mapGetters([
       'isAuth',
     ]),
+  },
+  watch: {
+    $route() {
+      this.toggleMenu();
+    },
   },
 };
 </script>

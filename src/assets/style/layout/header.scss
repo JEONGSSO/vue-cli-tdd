@@ -22,15 +22,79 @@
   .btn_menu {
     display: block;
     height: 100%;
+    span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background-color: #000;
+      margin: 4px 0;
+    }
   }
 
-  .nav_header .list_menu {
+  $menu_width: 15%;
+  .menu_wrap {
     position: fixed;
-    width: 100px;
+    z-index: 2;
+    width: $menu_width;
+    height: 100vh;
+    border: solid 1px #000;
+    background-color: #fff;
+    right: -$menu_width;
+    box-sizing: border-box;
+    transition: right .2s ease-in-out;
+
+    &.selected {
+      right: 0;
+      transition: right .2s ease-in-out;
+    }
+
+    &.hover {
+      right: calc(-14% - 12px);
+    }
+
+    &.selected.hover {
+      right: 0;
+    }
+
+    .menu_btn {
+      position: relative;
+      opacity: 1;
+      width: 20px;
+      height: 30px;
+      left: -21px;
+      top: 5%;
+      font-size: 0;
+      transition: all .2s ease-in-out;
+
+      &.selected {
+        opacity: 0;
+        visibility: hidden;
+        transition: all .2s ease-in-out;
+      }
+
+      .test_btn {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        border: solid 1px;
+        background-color: $color4;
+      }
+    }
 
     .list_item a {
       display: block;
-      border: solid 1px gray;
     }
   }
+
+  .background_wrap {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: .3;
+    background-color: #000;
+  }
+
 }
