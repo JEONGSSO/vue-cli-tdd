@@ -6,9 +6,9 @@ import mutations from './mutations';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-    isAuth: !!localStorage.getItem('token'),
+    token: null,
     modalName: '',
     todoList: [],
     boardList: [],
@@ -17,12 +17,17 @@ export default new Vuex.Store({
   actions,
   mutations,
   getters: {
-    isAuth: ({ isAuth }) => isAuth,
+    isAuth: ({ token }) => !!token,
     modalName: ({ modalName }) => modalName,
     boardList: ({ boardList }) => boardList,
     cardList: ({ cardList }) => cardList,
   },
 });
+
+const { token } = localStorage;
+store.commit('SET_TOKEN', token);
+
+export default store;
 
 // Mutations: state 값을 변경하는 로직 (동기적)
 // Actions 는 비동기적 로직을 정의

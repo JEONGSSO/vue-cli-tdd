@@ -1,6 +1,14 @@
+// eslint-disable-next-line import/named
+import { setInHeaderToken } from '../utils/index';
+
 export default {
-  IS_AUTH() {
-    this.state.isAuth = !this.state.isAuth;
+  SET_TOKEN(state, accessToken) {
+    state.token = accessToken;
+    // eslint-disable-next-line no-unused-expressions
+    accessToken
+      ? localStorage.setItem('token', accessToken)
+      : delete localStorage.token;
+    setInHeaderToken(accessToken);
   },
   OPEN_MODAL_NAME(state, payload) {
     state.modalName = payload;

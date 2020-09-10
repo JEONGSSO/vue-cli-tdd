@@ -40,7 +40,6 @@ import { mapGetters } from 'vuex';
 
 import menuList from '../router/routes';
 import { modal } from '../mixins';
-import setToken from '../utils/setToken';
 
 export default {
   name: 'common-header',
@@ -58,11 +57,11 @@ export default {
       this.isShowMenu = this.isShowMenu === false;
       this.hover = false;
     },
+    closeMenu() {
+      this.isShowMenu = false;
+    },
     logout() {
-      localStorage.removeItem('token');
-      setToken(null);
-      this.$store.dispatch('isAuth');
-      this.$router.push('/');
+      this.$store.dispatch('setToken', null);
     },
     isMouseOver(flag) {
       this.hover = flag;
@@ -82,7 +81,7 @@ export default {
   },
   watch: {
     $route() {
-      this.toggleMenu();
+      this.closeMenu();
     },
   },
 };

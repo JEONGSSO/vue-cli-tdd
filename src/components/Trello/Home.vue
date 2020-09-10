@@ -33,17 +33,17 @@ export default {
       'fetchBoardList',
     ]),
   },
-  created() {
-    this.fetchBoardList();
-  },
   computed: {
     ...mapGetters([
       'isAuth',
       'boardList',
     ]),
   },
+  created() {
+    this.fetchBoardList();
+  },
   mounted() {
-    if (this.$store.getters.isAuth) this.$store.dispatch('openModalName', 'login');
+    if (!this.$store.getters.isAuth) this.$store.dispatch('openModalName', 'login');
   },
 };
 </script>

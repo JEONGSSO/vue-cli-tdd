@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import { setToken } from '../../utils/index';
-
 export default {
   data() {
     return {
@@ -44,9 +42,7 @@ export default {
       const res = await this.$axios('POST', 'login', { email, password });
       if (res) {
         const { accessToken } = res.data;
-        localStorage.setItem('token', accessToken);
-        setToken(accessToken);
-        this.$store.dispatch('isAuth');
+        this.$store.dispatch('setToken', accessToken);
         this.$store.dispatch('closeModal');
       } else {
         this.error = '이메일 또는 패스워드를 확인해주세요';

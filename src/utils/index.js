@@ -1,3 +1,3 @@
-import { request as axios, setToken } from './sendAxios';
+import { request as axios, setInHeaderToken } from './sendAxios';
 
-export { axios, setToken };
+export { axios, setInHeaderToken };

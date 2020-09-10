@@ -1,9 +1,8 @@
-import { setToken } from '../utils';
 import { request } from '../utils/sendAxios';
 
 export default {
-  isAuth(context, payload) {
-    context.commit('IS_AUTH', payload);
+  setToken({ commit }, payload) {
+    commit('SET_TOKEN', payload);
   },
   openModalName(context, payload) {
     context.commit('OPEN_MODAL_NAME', payload);
@@ -12,7 +11,6 @@ export default {
     context.commit('CLOSE_MODAL', payload);
   },
   async fetchBoardList({ commit }) {
-    setToken(localStorage.getItem('token'));
     try {
       const { data } = await request('get', 'boards');
       commit('FETCH_BOARD_LIST', data.list);

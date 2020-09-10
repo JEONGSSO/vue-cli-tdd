@@ -12,7 +12,7 @@ const UnAuthRedirector = () => {
   console.log('401');
 };
 
-const setToken = (token) => {
+const setInHeaderToken = (token) => {
   axios.defaults.headers.common.Authorization = token ? `Bearer ${token}` : null;
 };
 
@@ -26,4 +26,4 @@ const request = (method, url, data) => axios({
   if (status === HTTP_STATUS.UN_AHTHORIZED) UnAuthRedirector();
 });
 
-export { request, setToken };
+export { request, setInHeaderToken };
