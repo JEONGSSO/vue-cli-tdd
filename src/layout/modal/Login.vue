@@ -24,11 +24,17 @@
       </form>
       <p class="error" v-if="error">{{error}}</p>
     </div>
+    <NaverLogin />
   </div>
 </template>
 
 <script>
+import NaverLogin from '../../components/NaverLogin.vue';
+
 export default {
+  components: {
+    NaverLogin,
+  },
   data() {
     return {
       email: 'test@test.com',
