@@ -16,11 +16,28 @@
       box-sizing: border-box;
       text-underline: none;
 
-      &.add{
+      &.add {
         text-align: center;
         color: #cccccc;
         background-color: #7f7f7f;
       }
+    }
+  }
+}
+
+.board_wrap {
+  .card_wrap {
+    display: flex;
+    .card_box {
+      width: 300px;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 5px;
+      padding: 10px;
+      margin-right: 10px;
+      background-color: #cccccc;
+      font-size: 14px;
+      font-weight: 600;
     }
   }
 }
