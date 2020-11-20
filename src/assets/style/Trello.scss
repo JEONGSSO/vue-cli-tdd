@@ -1,3 +1,5 @@
+@import "common";
+
 .home_wrap {
   h3 {
     margin-bottom: 10px;
@@ -26,18 +28,147 @@
 }
 
 .board_wrap {
+  .board_title {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
   .card_wrap {
-    display: flex;
+    overflow: hidden;
     .card_box {
+      position: relative;
+      float: left;
       width: 300px;
-      height: 32px;
       line-height: 32px;
       border-radius: 5px;
       padding: 10px;
       margin-right: 10px;
-      background-color: #cccccc;
+      background-color: #ebecf0;
       font-size: 14px;
       font-weight: 600;
+
+      &.new_box {
+        background-color: rgb(229, 230, 235, .4);
+        &:hover {
+          background-color: #ebecf0;
+        }
+      }
+      .add_list_btn {
+        display: flex;
+        width: 100%;
+        height: 20px;
+        align-items: center;
+        svg {
+          margin-right: 10px;
+        }
+      }
+
+      .card_header {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+
+        .card_option_btn {
+          width: 40px;
+          height: 40px;
+
+          &:hover {
+            background-color: rgba(9,30,66,.08);
+          }
+        }
+      }
+
+      .card_list {
+        margin-bottom: 10px;
+        li {
+          margin-bottom: 10px;
+          box-shadow: 0 1px 0 rgba(9,30,66,.25);
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .btn {
+          width: 100%;
+          line-height: 20px;
+          padding: 5px;
+          border-radius: 5px;
+          text-align: left;
+        }
+
+        .card_view_btn {
+          background-color: #fff;
+          &:hover {
+            background-color: rgba(9,30,66,.08);
+          }
+        }
+      }
+
+      .card_create_btn {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        line-height: 20px;
+        padding: 5px;
+        border-radius: 5px;
+        text-align: left;
+
+        svg {
+          margin-right: 10px;
+        }
+        &:hover {
+          background-color: rgba(9,30,66,.08);
+        }
+      }
+
+      .add_wrap {
+
+        .add_input {
+          width: 100%;
+          min-height: 50px;
+          border-radius: 5px;
+          margin-bottom: 10px;
+          padding: 10px;
+          box-sizing: border-box;
+          border: solid 1px #ded9d9;
+        }
+
+        .add_footer {
+          display: flex;
+          align-items: center;
+
+          .add_btn {
+            width: 100px;
+            height: 30px;
+            margin-right: 10px;
+            color: #fff;
+            background-color: $color3;
+          }
+
+          .close_btn {
+            svg {
+              transform: rotate(45deg);
+            }
+          }
+        }
+      }
     }
   }
+
+  .card_modal {
+    display: none;
+    position: fixed;
+    width: 50vw;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #cccccc;
+  }
+
+  @media all and (max-width: 700px) {
+    .card_modal {
+        width: 90vw;
+    }
+  }
+
 }

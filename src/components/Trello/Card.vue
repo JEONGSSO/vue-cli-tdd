@@ -1,8 +1,10 @@
 <template>
-  <div>
-    card
-    {{cid}}
-  </div>
+  <transition name="modal">
+    <div class="card_modal">
+      card
+      {{cid}}
+    </div>
+  </transition>
 </template>
 
 <script>

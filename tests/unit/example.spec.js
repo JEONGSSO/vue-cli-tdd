@@ -11,12 +11,12 @@ const router = new VueRouter({ routes });
 localVue.use(Vuex);
 localVue.use(VueRouter);
 
-let app;
-let data;
+// let app;
+// let data;
 // eslint-disable-next-line no-unused-vars
 let totalCount;
 
-const mockcallback = jest.fn((f) => f + 2);
+// const mockcallback = jest.fn((f) => f + 2);
 describe('뷰 테스트', () => {
   // beforeEach(() => { // it 테스트 전에 정의할 값들을 만들때 좋다. DRY로 중복되는 코드를 한번에 쓰자.
   // });
@@ -53,20 +53,20 @@ describe('뷰 테스트', () => {
   //   expect(data.todoList).toEqual([]);
   // });
 
-  it.skip('target item Quantity increse', () => {
-    const btn = app.find('.increse');
-    btn.trigger('click');
-    expect(data.todoList[0].quantity).toBe(4);
-  });
+  // it.skip('target item Quantity increse', () => {
+  //   const btn = app.find('.increse');
+  //   btn.trigger('click');
+  //   expect(data.todoList[0].quantity).toBe(4);
+  // });
 
-  it.skip('target item Quantity decrese', () => {
-    const btn = app.find('.decrese');
-    btn.trigger('click');
-    expect(data.todoList[0].quantity).toBe(2);
-  });
+  // it.skip('target item Quantity decrese', () => {
+  //   const btn = app.find('.decrese');
+  //   btn.trigger('click');
+  //   expect(data.todoList[0].quantity).toBe(2);
+  // });
 
-  it.skip('mockTest', () => {
-    [1].forEach(mockcallback);
-    expect(mockcallback.mock.results[0].value).toBe(3);
-  });
+  // it.skip('mockTest', () => {
+  //   [1].forEach(mockcallback);
+  //   expect(mockcallback.mock.results[0].value).toBe(3);
+  // });
 });
