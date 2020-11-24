@@ -4,7 +4,19 @@
     <ul class="card_wrap">
       <li class="card_box" v-for="(list, idx) in board.lists" :key="list.id">
         <div class="card_header">
-          <b>{{list.title}}</b>
+          <b
+            class="card_title"
+            v-show="!list.titleEdit"
+            @click="titleModifyToggle(list.id, idx)"
+          >
+            {{list.title}}
+          </b>
+          <input type="text"
+            class="card_title_input"
+            v-show="list.titleEdit"
+            :value="list.title"
+            ref="card_input"
+          >
           <button class="card_option_btn" @click="cardOption">
             <svg v-for="(circle, idx) in 3" :key="idx" width="5" height="5">
               <circle cx="2" cy="2" r="2" fill="#6b778c"></circle>
@@ -95,6 +107,13 @@ export default {
     cardOption(e) {
       console.log('cardOption', e);
     },
+    titleModifyToggle(boardId, index) {
+      this.board.lists[index].titleEdit = !this.board.lists[index].titleEdit;
+      if (this.board.lists[index].titleEdit) {
+        this.$forceUpdate();
+        document.addEventListener('click', (e) => this.outsideClick(e, boardId, index));
+      }
+    },
     cardAddModeToggle(listId, idx) {
       this.board.lists[idx].isCreate = !this.board.lists[idx].isCreate;
       this.$forceUpdate();
@@ -131,6 +150,22 @@ export default {
         this.board.lists.push(data.item);
       } catch (e) {
         console.log(e);
+      }
+    },
+    async outsideClick({ target }, boardId, index) {
+      const elem = this.$refs.card_input[0];
+      const titleEl = document.querySelector('.card_title');
+      if (titleEl === target) return;
+      if (target !== elem && !elem?.contains?.(target)) {
+        this.board.lists[index].titleEdit = false;
+        this.$forceUpdate();
+        document.removeEventListener('click', this.outsideClick);
+        const tt = await this.$axios('PUT', `cards/${boardId}`, {
+          title: elem.value,
+          bgColor: 'red',
+        });
+        console.log(tt);
+        // 카드 수정 1124
       }
     },
   },

@@ -1,4 +1,4 @@
-@import "common";
+@import 'common';
 
 .home_wrap {
   h3 {
@@ -16,7 +16,7 @@
       border-radius: 3px;
       color: #fff;
       box-sizing: border-box;
-      text-underline: none;
+      text-decoration: none;
 
       &.add {
         text-align: center;
@@ -48,7 +48,7 @@
       font-weight: 600;
 
       &.new_box {
-        background-color: rgb(229, 230, 235, .4);
+        background-color: rgb(229, 230, 235, 0.4);
         &:hover {
           background-color: #ebecf0;
         }
@@ -68,12 +68,22 @@
         justify-content: space-between;
         align-content: center;
 
+        .card_title {
+          width: 80%;
+          cursor: pointer;
+        }
+
+        .card_title_input {
+          width: 80%;
+          padding: 10px;
+        }
+
         .card_option_btn {
           width: 40px;
           height: 40px;
 
           &:hover {
-            background-color: rgba(9,30,66,.08);
+            background-color: rgba(9, 30, 66, 0.08);
           }
         }
       }
@@ -82,7 +92,7 @@
         margin-bottom: 10px;
         li {
           margin-bottom: 10px;
-          box-shadow: 0 1px 0 rgba(9,30,66,.25);
+          box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
           &:last-child {
             margin-bottom: 0;
           }
@@ -99,7 +109,7 @@
         .card_view_btn {
           background-color: #fff;
           &:hover {
-            background-color: rgba(9,30,66,.08);
+            background-color: rgba(9, 30, 66, 0.08);
           }
         }
       }
@@ -117,12 +127,11 @@
           margin-right: 10px;
         }
         &:hover {
-          background-color: rgba(9,30,66,.08);
+          background-color: rgba(9, 30, 66, 0.08);
         }
       }
 
       .add_wrap {
-
         .add_input {
           width: 100%;
           min-height: 50px;
@@ -167,8 +176,7 @@
 
   @media all and (max-width: 700px) {
     .card_modal {
-        width: 90vw;
+      width: 90vw;
     }
   }
-
 }
