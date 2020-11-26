@@ -33,9 +33,9 @@
     font-size: 16px;
   }
 
-  .card_wrap {
+  .list_wrap {
     overflow: hidden;
-    .card_box {
+    .list_box {
       position: relative;
       float: left;
       width: 300px;
@@ -63,22 +63,22 @@
         }
       }
 
-      .card_header {
+      .list_header {
         display: flex;
         justify-content: space-between;
         align-content: center;
 
-        .card_title {
+        .list_title {
           width: 80%;
           cursor: pointer;
         }
 
-        .card_title_input {
+        .list_title_input {
           width: 80%;
           padding: 10px;
         }
 
-        .card_option_btn {
+        .list_option_btn {
           width: 40px;
           height: 40px;
 

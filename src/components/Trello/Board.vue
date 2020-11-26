@@ -1,23 +1,23 @@
 <template>
   <div class="board_wrap">
     <h2 class="board_title">{{this.board.title}}</h2>
-    <ul class="card_wrap">
-      <li class="card_box" v-for="(list, idx) in board.lists" :key="list.id">
-        <div class="card_header">
+    <ul class="list_wrap">
+      <li class="list_box" v-for="(list, idx) in board.lists" :key="list.id">
+        <div class="list_header">
           <b
-            class="card_title"
+            class="list_title"
             v-show="!list.titleEdit"
             @click="titleModifyToggle(list.id, list.pos, idx)"
           >
             {{list.title}}
           </b>
           <input type="text"
-            class="card_title_input"
+            class="list_title_input"
             v-show="list.titleEdit"
             :value="list.title"
-            ref="card_input"
+            ref="list_input"
           >
-          <button class="card_option_btn" @click="cardOption(idx)">
+          <button class="list_option_btn" @click="listOption(idx)">
             <svg v-for="(circle, idx) in 3" :key="idx" width="5" height="5">
               <circle cx="2" cy="2" r="2" fill="#6b778c"></circle>
             </svg>
@@ -55,7 +55,7 @@
           </div>
         </div>
       </li>
-      <li class="card_box new_box">
+      <li class="list_box new_box">
         <button class="add_list_btn" @click="listAddModeToggle" v-if="!isAddList">
           <svg width="10" height="10" viewBox="0 0 24 24">
             <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"></path>
@@ -104,7 +104,7 @@ export default {
       const { data } = await this.$axios('GET', `boards/${bid}`);
       this.board = data.item;
     },
-    cardOption(index) {
+    listOption(index) {
       // 옵션 메뉴 열리게하고 카드 -> 리스트로 변경
       console.log(index);
       this.deleteCard();
@@ -112,11 +112,11 @@ export default {
     async deleteCard() {
       this.$axios('DELETE', `lists/${1}`);
     },
-    titleModifyToggle(cardId, pos, index) {
+    titleModifyToggle(listId, pos, index) {
       this.board.lists[index].titleEdit = !this.board.lists[index].titleEdit;
       if (this.board.lists[index].titleEdit) {
         this.$forceUpdate();
-        document.addEventListener('click', (e) => this.outsideClick(e, cardId, pos, index));
+        document.addEventListener('click', (e) => this.outsideClick(e, listId, pos, index));
       }
     },
     cardAddModeToggle(listId, idx) {
@@ -157,21 +157,22 @@ export default {
         console.log(e);
       }
     },
-    async outsideClick({ target }, cardId, pos, index) {
-      const elem = this.$refs.card_input[0];
-      const titleEl = document.querySelector('.card_title');
-      if (titleEl === target) return;
+    async outsideClick({ target }, listId, pos, index) {
+      const titleEl = document.querySelectorAll('.list_title');
+      const inputEl = document.querySelectorAll('.list_title_input');
+      if (titleEl[index] === target || inputEl[index] === target) return;
+
+      const elem = this.$refs.list_input[0];
       if (target !== elem && !elem?.contains?.(target)) {
-        this.board.lists[index].titleEdit = false;
-        this.$forceUpdate();
+        // 리스너가 삭제가 안된당 1126
         document.removeEventListener('click', this.outsideClick);
-        const tt = await this.$axios('PUT', `cards/${cardId}`, {
+        this.board.lists[index].titleEdit = false;
+        const { data } = await this.$axios('PUT', `lists/${listId}`, {
           title: elem.value,
-          description: 'sss',
-          listId: cardId,
           pos: pos / 1,
         });
-        console.log(tt);
+        this.board.lists[index] = data.item;
+        this.$forceUpdate();
       }
     },
   },
