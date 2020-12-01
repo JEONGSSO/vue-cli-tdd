@@ -65,8 +65,7 @@
         <div v-else class="add_wrap">
           <input type="text" class="add_input" v-model="listTitle"/>
           <div class="add_footer">
-            <button class="add_btn"
-                    @click="addList()">
+            <button class="add_btn" @click="addList()">
               Add List
             </button>
             <button class="close_btn" @click="listAddModeToggle">
@@ -96,6 +95,9 @@ export default {
       board: [],
       isAddList: false,
       listTitle: '',
+      lastListId: '',
+      lastPos: '',
+      lastListIndex: '',
     };
   },
   methods: {
@@ -116,7 +118,10 @@ export default {
       this.board.lists[index].titleEdit = !this.board.lists[index].titleEdit;
       if (this.board.lists[index].titleEdit) {
         this.$forceUpdate();
-        document.addEventListener('click', (e) => this.outsideClick(e, listId, pos, index));
+        this.lastListId = listId;
+        this.lastPos = pos;
+        this.lastListIndex = index;
+        document.addEventListener('click', this.outsideClick);
       }
     },
     cardAddModeToggle(listId, idx) {
@@ -157,21 +162,19 @@ export default {
         console.log(e);
       }
     },
-    async outsideClick({ target }, listId, pos, index) {
+    async outsideClick({ target }) {
       const titleEl = document.querySelectorAll('.list_title');
       const inputEl = document.querySelectorAll('.list_title_input');
-      if (titleEl[index] === target || inputEl[index] === target) return;
-
+      if (titleEl[this.lastListIndex] === target || inputEl[this.lastListIndex] === target) return;
+      document.removeEventListener('click', this.outsideClick);
       const elem = this.$refs.list_input[0];
       if (target !== elem && !elem?.contains?.(target)) {
-        // 리스너가 삭제가 안된당 1126
-        document.removeEventListener('click', this.outsideClick);
-        this.board.lists[index].titleEdit = false;
-        const { data } = await this.$axios('PUT', `lists/${listId}`, {
+        this.board.lists[this.lastListIndex].titleEdit = false;
+        const { data } = await this.$axios('PUT', `lists/${this.lastListId}`, {
           title: elem.value,
-          pos: pos / 1,
+          pos: this.lastPos / 1,
         });
-        this.board.lists[index] = data.item;
+        this.board.lists[this.lastListIndex] = data.item;
         this.$forceUpdate();
       }
     },
