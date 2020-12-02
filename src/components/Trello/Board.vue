@@ -17,11 +17,7 @@
             :value="list.title"
             ref="list_input"
           >
-          <button class="list_option_btn" @click="listOption(idx)">
-            <svg v-for="(circle, idx) in 3" :key="idx" width="5" height="5">
-              <circle cx="2" cy="2" r="2" fill="#6b778c"></circle>
-            </svg>
-          </button>
+          <button class="list_option_btn" @click="deleteCard(list.id, idx)"></button>
         </div>
         <div>
           <ul class="card_list">
@@ -106,13 +102,11 @@ export default {
       const { data } = await this.$axios('GET', `boards/${bid}`);
       this.board = data.item;
     },
-    listOption(index) {
-      // 옵션 메뉴 열리게하고 카드 -> 리스트로 변경
-      console.log(index);
-      this.deleteCard();
-    },
-    async deleteCard() {
-      this.$axios('DELETE', `lists/${1}`);
+    async deleteCard(listId, index) {
+      // 삭제 후 리스트에서 splice
+      console.log(this.board.lists);
+      this.$axios('DELETE', `lists/${listId}`);
+      console.log(listId, index);
     },
     titleModifyToggle(listId, pos, index) {
       this.board.lists[index].titleEdit = !this.board.lists[index].titleEdit;
@@ -121,6 +115,10 @@ export default {
         this.lastListId = listId;
         this.lastPos = pos;
         this.lastListIndex = index;
+        // 두번째 이상 리스트부터 타이틀 수정시 첫번째 타이틀 따라감 1202
+        console.log(listId);
+        console.log(pos);
+        console.log(index);
         document.addEventListener('click', this.outsideClick);
       }
     },
@@ -147,15 +145,11 @@ export default {
     },
     async addList() {
       try {
-        const {
-          $axios,
-          bid,
-          listTitle,
-        } = this;
+        const { $axios, bid, listTitle } = this;
         const { data } = await $axios('POST', 'lists', {
           title: listTitle,
           boardId: bid,
-          pos: bid,
+          pos: Math.floor(Math.random(1) * 10000),
         });
         this.board.lists.push(data.item);
       } catch (e) {
