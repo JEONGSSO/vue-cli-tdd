@@ -7,11 +7,15 @@
   .board_list {
     display: flex;
 
+    li {
+      position: relative;
+      margin: 0 20px 20px 0;
+    }
+
     .board_item {
       display: block;
-      width: 150px;
+      width: 200px;
       height: 100px;
-      margin: 0 20px 20px 0;
       padding: 10px;
       border-radius: 3px;
       color: #fff;
@@ -22,6 +26,22 @@
         text-align: center;
         color: #cccccc;
         background-color: #7f7f7f;
+      }
+    }
+
+    .board_remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      color: #fff;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #cccccc;
       }
     }
   }

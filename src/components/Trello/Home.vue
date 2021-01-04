@@ -10,6 +10,7 @@
         >
           {{board.title}}
         </router-link>
+        <button class="board_remove" @click="removeBoard(board.id)">X</button>
       </li>
       <button class="board_item add" @click="openModalName('addBoard')">Create new board...</button>
     </ul>
@@ -29,6 +30,14 @@ export default {
   components: {
   },
   methods: {
+    async removeBoard(bid) {
+      try {
+        await this.$axios('DELETE', `boards/${bid}`);
+        console.log('삭제완료');
+      } catch (error) {
+        console.log('removeBoard Errorrrrrrrrrr', error);
+      }
+    },
     ...mapActions([
       'fetchBoardList',
     ]),
