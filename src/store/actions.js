@@ -20,7 +20,7 @@ export default {
     }
   },
   async fetchCardList({ commit }, payload) {
-    commit('FETCG_CARD_LIST', payload);
+    commit('FETCH_CARD_LIST', payload);
   },
   /* todo */
   addItem({ commit }, { addItem }) {

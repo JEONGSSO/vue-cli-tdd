@@ -5,7 +5,7 @@ import store from './store';
 import router from './router';
 
 /* eslint-disable */
-import fp from './assets/js/fp';
+// import fp from './assets/js/fp';
 /* eslint-disable */
 
 import { axios } from './utils'

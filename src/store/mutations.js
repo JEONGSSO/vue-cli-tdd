@@ -19,7 +19,10 @@ export default {
   FETCH_BOARD_LIST(state, payload) {
     state.boardList = payload;
   },
-  FETCG_CARD_LIST(state, payload) {
+  REMOVE_BOARD_LIST(state, idx) {
+    state.boardList.splice(idx, 1);
+  },
+  FETCH_CARD_LIST(state, payload) {
     state.cardList = payload;
   },
   ADD_ITEM({ todoList }, item) {
